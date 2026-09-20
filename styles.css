@@ -720,3 +720,10 @@ footer {
   .works-header { padding: 0 1.25rem var(--sp-lg); }
   .exhibit-inner { padding: 0 1.25rem; }
 }
+
+.exhibit-img {
+  background-image: var(--img, linear-gradient(135deg, #222, #444));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

@@ -75,46 +75,42 @@
   /* ─────────────────────────────────────────────────────────
      HERO ENTRANCE
      ───────────────────────────────────────────────────────── */
-  function playHeroEntrance() {
-    if (prefersReducedMotion || !window.anime) return;
+     
+function playHeroEntrance() {
+  if (prefersReducedMotion || !window.anime || typeof anime.animate !== 'function') return;
 
-    const heroSelectors = '.entrance-meta, .entrance-headline, .entrance-desc, .entrance-footer';
+  anime.animate('.entrance-meta', {
+    opacity: [0, 1],
+    y: [14, 0],
+    duration: 700,
+    delay: 100,
+    ease: 'outQuart'
+  });
 
-    anime.set(heroSelectors, { opacity: 0 });
+  anime.animate('.entrance-headline', {
+    opacity: [0, 1],
+    y: [28, 0],
+    duration: 1100,
+    delay: 250,
+    ease: 'outExpo'
+  });
 
-    anime.animate('.entrance-meta', {
-      opacity: [0, 1],
-      translateY: [14, 0],
-      duration: 700,
-      delay: 100,
-      ease: 'outQuart'
-    });
+  anime.animate('.entrance-desc', {
+    opacity: [0, 1],
+    y: [20, 0],
+    duration: 900,
+    delay: 550,
+    ease: 'outQuart'
+  });
 
-    anime.animate('.entrance-headline', {
-      opacity: [0, 1],
-      translateY: [28, 0],
-      duration: 1100,
-      delay: 250,
-      ease: 'outExpo'
-    });
-
-    anime.animate('.entrance-desc', {
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 900,
-      delay: 550,
-      ease: 'outQuart'
-    });
-
-    anime.animate('.entrance-footer', {
-      opacity: [0, 1],
-      translateY: [16, 0],
-      duration: 900,
-      delay: 750,
-      ease: 'outQuart'
-    });
-  }
-
+  anime.animate('.entrance-footer', {
+    opacity: [0, 1],
+    y: [16, 0],
+    duration: 900,
+    delay: 750,
+    ease: 'outQuart'
+  });
+}
   /* ─────────────────────────────────────────────────────────
      NAV SCROLL STATE
      ───────────────────────────────────────────────────────── */
