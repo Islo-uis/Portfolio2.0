@@ -62,7 +62,7 @@ a { color: inherit; text-decoration: none; }
 button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
 ul, ol { list-style: none; }
 
-/* ─── NAV — 3-column grid, links centered ─────────────────── */
+/* ─── NAV ─────────────────────────────────────────────────── */
 #nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: grid;
@@ -109,7 +109,6 @@ ul, ol { list-style: none; }
   justify-content: flex-end;
 }
 
-/* Theme toggle */
 .theme-toggle {
   width: 32px; height: 32px;
   display: flex; align-items: center; justify-content: center;
@@ -136,7 +135,6 @@ ul, ol { list-style: none; }
   transition: transform 0.3s, opacity 0.3s;
 }
 
-/* Mobile nav overlay */
 #mobile-nav {
   display: none;
   position: fixed; inset: 0; z-index: 98;
@@ -284,7 +282,7 @@ ul, ol { list-style: none; }
   max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
 }
 
-/* ─── EXHIBIT IMAGES — data-image placeholder system ──────── */
+/* ─── EXHIBIT IMAGES — data-image system ──────────────────── */
 .exhibit-img {
   position: relative;
   overflow: hidden;
@@ -301,13 +299,11 @@ ul, ol { list-style: none; }
 .exhibit--wide-right .exhibit-img { aspect-ratio: 3/4; background-color: #1a1a1a; }
 .exhibit--editorial .exhibit-img { aspect-ratio: 4/3; background-color: #111; }
 
-/* Placeholder gradients per exhibit */
 .bg-v1 { --placeholder-grad: linear-gradient(135deg, #0D1B3E 0%, #1B2B5E 60%, #0a0a0a 100%); }
 .bg-v2 { --placeholder-grad: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%); }
 .bg-v3 { --placeholder-grad: linear-gradient(145deg, #0f2030 0%, #1B2B5E 100%); }
 .bg-v4 { --placeholder-grad: linear-gradient(145deg, #111111 0%, #1e1e1e 100%); }
 
-/* Placeholder label — shows only when no image is set */
 .exhibit-img-tag {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
@@ -321,10 +317,7 @@ ul, ol { list-style: none; }
   transition: opacity 0.4s var(--ease);
   pointer-events: none;
 }
-/* Hide the label once a real image filename is provided */
-.exhibit-img.has-image .exhibit-img-tag {
-  opacity: 0;
-}
+.exhibit-img.has-image .exhibit-img-tag { opacity: 0; }
 
 /* Exhibit layouts */
 .exhibit--full .exhibit-layout {
@@ -441,7 +434,7 @@ ul, ol { list-style: none; }
 .archive-yr { font-size: 0.7rem; color: var(--muted); font-weight: 300; }
 .archive-item:hover .archive-title { color: var(--accent); }
 
-/* ─── COLLABORATIONS ──────────────────────────────────────── */
+/* ─── COLLABORATIONS — logo marquee ───────────────────────── */
 #collab { padding: var(--sp-xl) 0; }
 .collab-track-wrap {
   overflow: hidden;
@@ -450,23 +443,40 @@ ul, ol { list-style: none; }
   padding: var(--sp-md) 0;
 }
 .collab-track {
-  display: flex; gap: 5rem; align-items: center;
+  display: flex; gap: 4rem; align-items: center;
   width: max-content;
-  animation: scroll-track 32s linear infinite;
+  animation: scroll-track 45s linear infinite;
   will-change: transform;
 }
 .collab-track:hover { animation-play-state: paused; }
+
 .collab-logo {
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 400;
-  color: var(--graphite);
-  white-space: nowrap;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 0.5rem;
 }
-.collab-logo:hover { opacity: 1; }
+.collab-logo img {
+  height: 36px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.55) contrast(1.1);
+  transition: filter 0.4s var(--ease);
+}
+.collab-logo:hover img {
+  filter: grayscale(0%) opacity(1) contrast(1);
+}
+
+[data-theme="dark"] .collab-logo img {
+  filter: grayscale(100%) invert(1) opacity(0.55) contrast(1.05);
+}
+[data-theme="dark"] .collab-logo:hover img {
+  filter: grayscale(0%) invert(0) opacity(1) contrast(1);
+}
+
 @keyframes scroll-track {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -553,11 +563,8 @@ ul, ol { list-style: none; }
   background-size: cover;
   background-position: center;
   gap: 1rem;
-  transition: background-image 0.4s var(--ease);
 }
-.portrait-placeholder.has-image .ph-label {
-  opacity: 0;
-}
+.portrait-placeholder.has-image .ph-label { opacity: 0; }
 .portrait-placeholder .ph-label {
   color: rgba(255,255,255,0.2);
   font-size: 0.55rem; letter-spacing: 0.2em;
@@ -622,14 +629,17 @@ ul, ol { list-style: none; }
   display: flex; align-items: center; justify-content: space-between;
   border-bottom: 1px solid var(--rule);
   padding-bottom: var(--sp-md);
+  gap: 1rem;
 }
 .contact-link-label {
   font-size: 0.6rem; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--muted); font-weight: 400;
+  flex-shrink: 0;
 }
 .contact-link-val {
   font-size: 0.875rem; color: var(--ink);
   font-weight: 300; transition: color 0.2s;
+  text-align: right;
 }
 .contact-link-val:hover { color: var(--accent); }
 
@@ -691,7 +701,13 @@ footer {
   .about-portrait { max-width: 260px; }
 
   .contact-inner { grid-template-columns: 1fr; }
+  .contact-link-row { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+  .contact-link-val { text-align: left; }
   footer { flex-direction: column; align-items: flex-start; }
+
+  .collab-track { gap: 2.5rem; animation-duration: 30s; }
+  .collab-logo { height: 36px; }
+  .collab-logo img { height: 28px; max-width: 100px; }
 }
 @media (max-width: 480px) {
   :root { --sp-xl: 4rem; --sp-lg: 3rem; }

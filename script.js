@@ -42,9 +42,8 @@
 
   /* ─────────────────────────────────────────────────────────
      IMAGE PLACEHOLDERS
-     Reads data-image="path/to/file.jpg" and applies it as a
-     background. If the file doesn't exist, the CSS gradient
-     placeholder shows through automatically.
+     Reads data-image="path/to/file.jpg" and applies it.
+     If the image fails to load, falls back to the CSS gradient.
      ───────────────────────────────────────────────────────── */
   function applyImagePlaceholders() {
     const targets = document.querySelectorAll('[data-image]');
@@ -52,17 +51,22 @@
       const file = (el.dataset.image || '').trim();
       if (!file) return;
 
-      // Set the CSS variable — used by `.exhibit-img` and `.portrait-placeholder`
+      // Optimistically apply the image
       el.style.setProperty('--img', `url('${file}')`);
-
-      // Flag the element so the placeholder label hides
       el.classList.add('has-image');
 
-      // Detect broken images and revert to placeholder state gracefully
+      // Verify the image actually loads; if not, revert to placeholder
       const test = new Image();
+      test.onload = () => {
+        // Confirmed loaded — keep image
+        el.classList.add('has-image');
+      };
       test.onerror = () => {
+        // Failed — revert to gradient placeholder
         el.classList.remove('has-image');
         el.style.removeProperty('--img');
+        // eslint-disable-next-line no-console
+        console.warn(`[Exhibition] Image not found: ${file}`);
       };
       test.src = file;
     });
