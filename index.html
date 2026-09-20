@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Louis Amiel Rollorata — Digital Works</title>
+<meta name="description" content="A curated exhibition of digital works by Louis Amiel Rollorata — web designer, front-end developer, and digital creator.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js"></script>
+</head>
+<body>
+
+<!-- ═══ NAV ══════════════════════════════════════════════════ -->
+<nav id="nav" aria-label="Exhibition navigation">
+  <ul class="nav-links" role="list">
+    <li><a href="#works">Selected Works</a></li>
+    <li><a href="#archive">Archive</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" title="Toggle theme">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+  <button class="close-nav" id="close-nav" aria-label="Close menu">✕</button>
+  <a href="#entrance">Entrance</a>
+  <a href="#works">Selected Works</a>
+  <a href="#archive">Archive</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main>
+
+<!-- ═══ ENTRANCE ════════════════════════════════════════════ -->
+<section id="entrance" aria-label="Entrance">
+  <div class="entrance-inner">
+    <p class="entrance-meta" data-hero="meta">Exhibition — Digital Collection — Est. 2020</p>
+    <h1 class="entrance-headline" data-hero="headline">
+      Digital works,<br>
+      <em>carefully chosen.
+    </h1>
+    <p class="entrance-desc" data-hero="desc">
+      I design and build digital things — websites, interfaces, and visual systems —
+      with a background that spans front-end development, UI/UX, graphic design,
+      and content creation.
+    </p>
+    <div class="entrance-footer" data-hero="footer">
+      <a href="#works" class="entrance-cta" aria-label="View selected works">
+        Selected works
+        <span class="arr" aria-hidden="true"></span>
+      </a>
+      <span class="entrance-scroll-hint">Scroll to explore</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SELECTED WORKS ═══════════════════════════════════════ -->
+<section id="works" aria-label="Selected works">
+  <div class="works-header reveal">
+    <div class="section-eyebrow">
+      <span class="num">02</span>
+      <span class="label">Selected Exhibition</span>
+      <span class="line" aria-hidden="true"></span>
+    </div>
+    <h2 class="works-title">
+      Four projects. Each one presented as it deserves to be.
+    </h2>
+  </div>
+
+  <!-- ┌─────────────────────────────────────────────────────┐
+       │  TO ADD AN IMAGE: replace the value in data-image   │
+       │  Example: data-image="images/my-photo.jpg"          │
+       │  Leave it empty ("") to keep the placeholder.       │
+       └─────────────────────────────────────────────────────┘ -->
+
+  <!-- EXHIBIT 01 — Full width -->
+  <article class="exhibit exhibit--full reveal" aria-label="Exhibit 01">
+    <div class="exhibit-inner">
+      <div class="exhibit-layout">
+        <figure class="exhibit-img bg-v1" data-clip-reveal data-image="images/sport-court.jpg">
+          <span class="exhibit-img-tag">Sport Court Ontario — Cover</span>
+        </figure>
+        <div class="exhibit-bottom">
+          <div>
+            <p class="exhibit-catalog">Exhibit 01 · 2024 · Social Media Design</p>
+            <h3 class="exhibit-title">Sport Court Ontario</h3>
+          </div>
+          <div>
+            <blockquote class="exhibit-note">
+              Built around the conviction that sport surfaces shouldn't need corporate language
+              to earn trust. The system creates consistency without sacrificing warmth.
+            </blockquote>
+            <p class="exhibit-desc">
+              Ongoing social media content system for a professional court surface company in Canada.
+              Developed visual frameworks, content templates, writing guidelines, and a scheduling
+              approach that keeps the brand active without losing coherence.
+            </p>
+          </div>
+          <div>
+            <div class="exhibit-meta">
+              <span class="meta-tag">Social Media</span>
+              <span class="meta-tag">Brand Systems</span>
+              <span class="meta-tag">Content Design</span>
+              <span class="meta-tag">Canva</span>
+            </div>
+            <p style="font-size:0.7rem;color:var(--muted);font-weight:300;">
+              Role: Social Media Manager &amp; Content Designer
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- EXHIBIT 02 — Split -->
+  <article class="exhibit exhibit--split reveal" aria-label="Exhibit 02">
+    <div class="exhibit-inner">
+      <div class="exhibit-layout">
+        <figure class="exhibit-img bg-v2" data-clip-reveal data-image="images/portfolio.jpg">
+          <span class="exhibit-img-tag">Personal Portfolio — Preview</span>
+        </figure>
+        <div class="exhibit-content">
+          <p class="exhibit-catalog">Exhibit 02 · 2024 · Web Design & Development</p>
+          <h3 class="exhibit-title">Personal Portfolio</h3>
+          <blockquote class="exhibit-note">
+            The challenge of designing for yourself is that there is no brief
+            you can hide behind. Every decision is a statement.
+          </blockquote>
+          <p class="exhibit-desc">
+            Single-file portfolio site designed and developed as an ongoing project.
+            Built with plain HTML, CSS, and JavaScript, prioritizing fast load,
+            clean architecture, and a visual identity that doesn't feel borrowed.
+          </p>
+          <div class="exhibit-meta">
+            <span class="meta-tag">HTML</span>
+            <span class="meta-tag">CSS</span>
+            <span class="meta-tag">JavaScript</span>
+            <span class="meta-tag">UI/UX</span>
+          </div>
+          <p style="font-size:0.7rem;color:var(--muted);font-weight:300;margin-bottom:1.5rem;">Role: Designer &amp; Developer</p>
+          <a href="#" class="exhibit-link" aria-label="View Portfolio project">View project ↗</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- EXHIBIT 03 — Editorial -->
+  <article class="exhibit exhibit--editorial reveal" aria-label="Exhibit 03">
+    <div class="exhibit-inner">
+      <div class="exhibit-layout">
+        <figure class="exhibit-img bg-v3" data-clip-reveal data-image="images/abecon.jpg">
+          <span class="exhibit-img-tag">ABECON 2025 — Key Visual</span>
+        </figure>
+        <div class="exhibit-content">
+          <p class="exhibit-catalog">Exhibit 03 · 2025 · Event Design</p>
+          <h3 class="exhibit-title">ABECON 2025</h3>
+          <blockquote class="exhibit-note">
+            An event conference platform that needed to feel official without
+            feeling bureaucratic. The visual direction had to carry authority
+            without closing the door on younger participants.
+          </blockquote>
+          <p class="exhibit-desc">
+            Visual design and digital materials for ABECON 2025.
+            Developed brand assets, layouts, and digital communication materials
+            for the conference environment.
+          </p>
+          <div class="exhibit-meta">
+            <span class="meta-tag">Graphic Design</span>
+            <span class="meta-tag">Layout</span>
+            <span class="meta-tag">Figma</span>
+            <span class="meta-tag">Canva</span>
+          </div>
+          <p style="font-size:0.7rem;color:var(--muted);font-weight:300;">Role: Visual Designer</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- EXHIBIT 04 — Wide right -->
+  <article class="exhibit exhibit--wide-right reveal" aria-label="Exhibit 04">
+    <div class="exhibit-inner">
+      <div class="exhibit-layout">
+        <div class="exhibit-content">
+          <p class="exhibit-catalog">Exhibit 04 · 2024 · Web Platform</p>
+          <h3 class="exhibit-title">DOST-PCAARD<br>Digital Platform</h3>
+          <blockquote class="exhibit-note">
+            Government digital platforms often confuse seriousness with complexity.
+            The goal was to make a technical research system feel like something
+            a human might actually want to use.
+          </blockquote>
+          <p class="exhibit-desc">
+            Web and digital work for the Philippine Council for Agriculture,
+            Aquatic and Natural Resources Research and Development.
+            Focus on improving the usability and visual presentation of institutional
+            digital materials.
+          </p>
+          <div class="exhibit-meta">
+            <span class="meta-tag">Web Design</span>
+            <span class="meta-tag">UI/UX</span>
+            <span class="meta-tag">Front-End</span>
+          </div>
+          <p style="font-size:0.7rem;color:var(--muted);font-weight:300;margin-bottom:1.5rem;">Role: Front-End Developer &amp; UI Designer</p>
+          <a href="#" class="exhibit-link">View project ↗</a>
+        </div>
+        <figure class="exhibit-img bg-v4" data-clip-reveal data-image="images/dost-pcaard.jpg">
+          <span class="exhibit-img-tag">DOST-PCAARD — Interface</span>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ═══ ARCHIVE ══════════════════════════════════════════════ -->
+<section id="archive" aria-label="Archive">
+  <div class="container reveal">
+    <div class="section-eyebrow">
+      <span class="num">03</span>
+      <span class="label">Archive</span>
+      <span class="line" aria-hidden="true"></span>
+    </div>
+    <div style="margin-bottom:var(--sp-lg);display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <h2 style="font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;line-height:1.1;">
+        Additional work, organized by medium.
+      </h2>
+      <span style="font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">Selected pieces only</span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="archive-grid reveal" style="border-top:1px solid var(--rule);border-left:1px solid var(--rule);">
+      <div class="archive-item">
+        <p class="archive-cat">Web</p>
+        <h3 class="archive-title">Atlas Edge Global — Web Presence</h3>
+        <span class="archive-yr">2024</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">Graphic Design</p>
+        <h3 class="archive-title">The Light Publication — Layout Design</h3>
+        <span class="archive-yr">2024</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">Motion / Content</p>
+        <h3 class="archive-title">PNC Studios — Short-Form Video</h3>
+        <span class="archive-yr">2024</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">Social Media</p>
+        <h3 class="archive-title">Sold As Fact — Content Page</h3>
+        <span class="archive-yr">2025</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">UI/UX</p>
+        <h3 class="archive-title">DXRN News — Broadcast Identity</h3>
+        <span class="archive-yr">2025</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">Experiments</p>
+        <h3 class="archive-title">Generals — Browser Strategy Game</h3>
+        <span class="archive-yr">2025</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">Tool / Dev</p>
+        <h3 class="archive-title">Local Video Downloader — Flask + yt-dlp</h3>
+        <span class="archive-yr">2025</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">Content System</p>
+        <h3 class="archive-title">Wrong vs. Right — Visual Content Format</h3>
+        <span class="archive-yr">2025</span>
+      </div>
+      <div class="archive-item">
+        <p class="archive-cat">AI-assisted</p>
+        <h3 class="archive-title">AI Visual Experiments — Generative Workflows</h3>
+        <span class="archive-yr">2024–25</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COLLABORATIONS ═══════════════════════════════════════ -->
+<section id="collab" aria-label="Selected collaborations">
+  <div class="container reveal">
+    <div class="section-eyebrow">
+      <span class="num">04</span>
+      <span class="label">Selected Collaborations</span>
+      <span class="line" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="collab-track-wrap reveal" role="marquee" aria-label="Clients and collaborations">
+    <div class="collab-track" aria-hidden="true">
+      <span class="collab-logo">Sport Court Ontario</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">Atlas Edge Global</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">ABECON 2025</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">DOST-PCAARD</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">PNC Studios</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">The Light Publication</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">University of Southeastern Philippines</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">Sport Court Ontario</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">Atlas Edge Global</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">ABECON 2025</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">DOST-PCAARD</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">PNC Studios</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">The Light Publication</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+      <span class="collab-logo">University of Southeastern Philippines</span>
+      <span class="collab-logo" style="color:var(--rule);font-size:0.4rem;">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ════════════════════════════════════════ -->
+<section id="testimonials" aria-label="Words from collaborators">
+  <div class="container">
+    <div class="section-eyebrow reveal">
+      <span class="num">05</span>
+      <span class="label">Words from Collaborators</span>
+      <span class="line" aria-hidden="true"></span>
+    </div>
+    <div class="test-carousel reveal" role="region" aria-live="polite" aria-label="Testimonials">
+      <div class="test-slide active" id="t0">
+        <p class="test-quote">
+          "Working with Louis on the Sport Court Ontario content system was seamless.
+          He brought structure to what was an informal process, and the output was consistent
+          and on-brand every time."
+        </p>
+        <div class="test-attr">
+          <strong>[COLLABORATOR NAME]</strong>
+          Role · Sport Court Ontario
+        </div>
+      </div>
+      <div class="test-slide" id="t1">
+        <p class="test-quote">
+          "Louis has the rare ability to understand both the technical requirements
+          and the visual direction at the same time. He doesn't need much guidance
+          once he understands the goal."
+        </p>
+        <div class="test-attr">
+          <strong>[COLLABORATOR NAME]</strong>
+          Role · [ORGANIZATION]
+        </div>
+      </div>
+      <div class="test-slide" id="t2">
+        <p class="test-quote">
+          "Detail-oriented and reliable. Louis consistently delivered work that was
+          polished without being asked to polish it. That's the difference."
+        </p>
+        <div class="test-attr">
+          <strong>[COLLABORATOR NAME]</strong>
+          Role · [ORGANIZATION]
+        </div>
+      </div>
+    </div>
+    <div class="test-controls reveal">
+      <button class="test-btn prev" aria-label="Previous testimonial"></button>
+      <span class="test-count" id="test-counter">01 / 03</span>
+      <button class="test-btn next" aria-label="Next testimonial"></button>
+      <span style="font-size:0.6rem;color:var(--muted);margin-left:auto;font-weight:300;">
+        [Replace placeholder quotes with real testimonials]
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ════════════════════════════════════════════════ -->
+<section id="about" aria-label="About the curator">
+  <div class="container">
+    <div class="section-eyebrow reveal">
+      <span class="num">06</span>
+      <span class="label">About the Curator</span>
+      <span class="line" aria-hidden="true"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="about-portrait" role="img" aria-label="Portrait placeholder">
+          <div class="portrait-placeholder" data-image="images/portrait.jpg">
+            <div class="ph-label">[Portrait photograph]</div>
+            <div class="ph-label">Replace with your photo</div>
+          </div>
+        </div>
+        <p class="about-caption">Louis Amiel B. Rollorata — Tagum City, Philippines</p>
+      </div>
+      <div class="about-right reveal">
+        <h2 class="about-name">
+          Louis<br>
+          <em>Amiel</em><br>
+          Rollorata
+        </h2>
+        <p class="about-body">
+          I work at the intersection of web development, design, and content —
+          which is less a niche than it sounds. Most digital work requires all three
+          at once, and I've found that being comfortable across them makes the
+          individual parts stronger.
+        </p>
+        <p class="about-body">
+          My background is in front-end development and UI/UX design, but it extends
+          into graphic design, publication layout, short-form video, and content systems.
+          I'm currently completing a BS in Information Technology with a major in
+          Information Security at the University of Southeastern Philippines.
+        </p>
+        <p class="about-body">
+          I'm drawn to projects where the quality of thinking is visible in the final
+          output. I work carefully, question assumptions, and try to make things that
+          feel considered rather than assembled.
+        </p>
+
+        <div class="skills-block">
+          <div class="skill-group">
+            <p class="skill-label">Digital / Web</p>
+            <p class="skill-items">Web Design · Front-End Development · UI/UX Design · Wix · WordPress · HTML · CSS · JavaScript</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-label">Visual</p>
+            <p class="skill-items">Graphic Design · Publication Layout · Figma · Adobe Photoshop · Canva</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-label">Motion &amp; Content</p>
+            <p class="skill-items">Short-form Video Editing · Motion Content · Social Media Content</p>
+          </div>
+          <div class="skill-group">
+            <p class="skill-label">Systems &amp; Tools</p>
+            <p class="skill-items">Content Scheduling · Digital Organization · AI-assisted Visual Workflows · Python (basic)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ══════════════════════════════════════════════ -->
+<section id="contact" aria-label="Contact">
+  <div class="container">
+    <div class="section-eyebrow reveal">
+      <span class="num">07</span>
+      <span class="label">Contact</span>
+      <span class="line" aria-hidden="true"></span>
+    </div>
+    <div class="contact-inner">
+      <div class="reveal">
+        <h2 class="contact-statement">
+          Let's build something<br>
+          <em>worth showing.</em>
+        </h2>
+        <p class="contact-sub">
+          I'm available for freelance projects, design collaborations,
+          and front-end development work. If you have something specific in mind,
+          I'd like to hear it.
+        </p>
+      </div>
+      <div class="contact-links reveal">
+        <div class="contact-link-row">
+          <span class="contact-link-label">Email</span>
+          <a href="mailto:your@email.com" class="contact-link-val">your@email.com</a>
+        </div>
+        <div class="contact-link-row">
+          <span class="contact-link-label">LinkedIn</span>
+          <a href="#" class="contact-link-val" target="_blank" rel="noopener">linkedin.com/in/islo</a>
+        </div>
+        <div class="contact-link-row">
+          <span class="contact-link-label">GitHub</span>
+          <a href="#" class="contact-link-val" target="_blank" rel="noopener">github.com/islo</a>
+        </div>
+        <div class="contact-link-row">
+          <span class="contact-link-label">Based in</span>
+          <span class="contact-link-val">Tagum City, Davao del Norte, Philippines</span>
+        </div>
+        <div style="padding-top:var(--sp-sm);">
+          <span style="font-size:0.6rem;color:var(--muted);font-weight:300;">[Update links with real contact details]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
+<footer>
+  <span class="footer-id">Louis Amiel Rollorata</span>
+  <span class="footer-copy">Digital Works — Tagum City, Philippines — <span id="yr"></span></span>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
