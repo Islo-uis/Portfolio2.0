@@ -156,31 +156,55 @@
 
   /* ══════════════════════════════════════════════════════════════
      DYNAMIC OVERLAY — three blobs drifting via anime.js
+     Paused when the tab is hidden to save battery.
      ══════════════════════════════════════════════════════════════ */
+  var overlayAnimations = [];
+
   function initOverlayMotion() {
     if (prefersReducedMotion) return;
     if (!window.anime || typeof anime.animate !== 'function') return;
 
-    anime.animate('.blob-1', {
-      x: [0, 140], y: [0, 100], scale: [1, 1.2],
-      duration: 20000, loop: true, alternate: true, ease: 'inOutSine'
-    });
-    anime.animate('.blob-2', {
-      x: [0, -180], y: [0, 120], scale: [1, 1.15],
-      duration: 26000, loop: true, alternate: true, ease: 'inOutSine'
-    });
-    anime.animate('.blob-3', {
-      x: [0, 110], y: [0, -140], scale: [1, 1.22],
-      duration: 24000, loop: true, alternate: true, ease: 'inOutSine'
-    });
+    overlayAnimations.push(
+      anime.animate('.blob-1', {
+        x: [0, 140], y: [0, 100], scale: [1, 1.2],
+        duration: 20000, loop: true, alternate: true, ease: 'inOutSine'
+      }),
+      anime.animate('.blob-2', {
+        x: [0, -180], y: [0, 120], scale: [1, 1.15],
+        duration: 26000, loop: true, alternate: true, ease: 'inOutSine'
+      }),
+      anime.animate('.blob-3', {
+        x: [0, 110], y: [0, -140], scale: [1, 1.22],
+        duration: 24000, loop: true, alternate: true, ease: 'inOutSine'
+      })
+    );
   }
+
+  /* Pause overlay animations when the tab is not visible */
+  document.addEventListener('visibilitychange', function () {
+    if (!overlayAnimations.length) return;
+    overlayAnimations.forEach(function (a) {
+      if (!a) return;
+      if (document.hidden) {
+        if (typeof a.pause === 'function') a.pause();
+      } else {
+        if (typeof a.play === 'function') a.play();
+      }
+    });
+  });
 
   /* ══════════════════════════════════════════════════════════════
      NAV
      ══════════════════════════════════════════════════════════════ */
   var nav = document.getElementById('nav');
+  var navTicking = false;
   window.addEventListener('scroll', function () {
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+    if (navTicking) return;
+    navTicking = true;
+    requestAnimationFrame(function () {
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+      navTicking = false;
+    });
   }, { passive: true });
 
   var mobileNav = document.getElementById('mobile-nav');
@@ -231,7 +255,7 @@
           revealObs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
     reveals.forEach(function (el) { revealObs.observe(el); });
   } else {
     reveals.forEach(function (el) { el.classList.add('in'); });
@@ -262,7 +286,10 @@
     }
     var actionLabel = p.ndaBadge ? 'Request case study' : (CAT_ACTION[cat] || 'View');
 
-    var thumbHTML = p.thumb ? '<img src="' + p.thumb + '" alt="" loading="lazy" data-thumb>' : '';
+    /* Card thumbnails: lazy + async decode so they don't block the main thread */
+    var thumbHTML = p.thumb
+      ? '<img src="' + p.thumb + '" alt="" loading="lazy" decoding="async" width="400" height="300" data-thumb>'
+      : '';
     var isVideo = cat === 'reel';
     var playHTML = isVideo
       ? '<div class="g-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>'
@@ -300,11 +327,14 @@
     return card;
   }
 
+  /* Build the grid in one DocumentFragment then swap it in once */
   function renderGrid(items, gridId, defaultCat) {
     var grid = document.getElementById(gridId);
     if (!grid) return;
+    var frag = document.createDocumentFragment();
+    items.forEach(function (p) { frag.appendChild(createCard(p, defaultCat)); });
     grid.innerHTML = '';
-    items.forEach(function (p) { grid.appendChild(createCard(p, defaultCat)); });
+    grid.appendChild(frag);
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -347,6 +377,7 @@
     modalImagesSection.style.display = '';
     if (modalImagesLabel) modalImagesLabel.textContent = label || 'Gallery';
 
+    var frag = document.createDocumentFragment();
     images.forEach(function (src, i) {
       var fig = document.createElement('figure');
       fig.setAttribute('role', 'button');
@@ -357,6 +388,7 @@
       img.src = src;
       img.alt = title + ' — ' + (i + 1);
       img.loading = 'lazy';
+      img.decoding = 'async';
 
       img.addEventListener('error', function () {
         console.warn('[Modal] Missing image → ' + src);
@@ -378,8 +410,9 @@
         }
       });
 
-      modalGrid.appendChild(fig);
+      frag.appendChild(fig);
     });
+    modalGrid.appendChild(frag);
   }
 
   function renderVideos(videos) {
@@ -393,21 +426,23 @@
     }
     modalVideosSection.style.display = '';
 
+    var frag = document.createDocumentFragment();
     videos.forEach(function (src, i) {
       var thumb = document.createElement('div');
       thumb.className = 'modal-video-thumb' + (i === 0 ? ' active' : '');
+
       var v = document.createElement('video');
       v.src = src;
       v.muted = true;
       v.playsInline = true;
-      v.preload = 'metadata';
-      v.addEventListener('loadedmetadata', function () {
-        try { this.currentTime = Math.min(1, this.duration / 3); } catch (e) {}
-      });
+      v.preload = 'none';
+      v.setAttribute('aria-hidden', 'true');
+
       thumb.appendChild(v);
       thumb.addEventListener('click', function () { selectVideo(i); });
-      modalVideoStrip.appendChild(thumb);
+      frag.appendChild(thumb);
     });
+    modalVideoStrip.appendChild(frag);
 
     selectVideo(0);
   }
@@ -481,6 +516,7 @@
   function selectVideo(i) {
     if (i < 0 || i >= currentVideos.length) return;
     currentVideoIndex = i;
+    modalVideoPlayer.preload = 'auto';
     modalVideoPlayer.src = currentVideos[i];
     modalVideoPlayer.load();
     modalVideoPlayer.play().catch(function () {});
@@ -491,6 +527,8 @@
 
   function closeModal() {
     modalVideoPlayer.pause();
+    modalVideoPlayer.removeAttribute('src');
+    modalVideoPlayer.load();
     modal.classList.remove('visible');
     setTimeout(function () {
       modal.classList.remove('open');
@@ -527,6 +565,17 @@
   var ilbCounter = document.getElementById('ilbCounter');
   var ilbIndex = 0;
 
+  /* Preload adjacent images when navigating */
+  function preloadAdjacent() {
+    if (currentImages.length < 2) return;
+    var next = (ilbIndex + 1) % currentImages.length;
+    var prev = (ilbIndex - 1 + currentImages.length) % currentImages.length;
+    [next, prev].forEach(function (idx) {
+      var pre = new Image();
+      pre.src = currentImages[idx];
+    });
+  }
+
   function openImageLightbox(index) {
     if (!currentImages.length) return;
     ilbIndex = Math.max(0, Math.min(index, currentImages.length - 1));
@@ -546,6 +595,7 @@
     var src = currentImages[ilbIndex];
     ilbImage.src = src;
     ilbImage.alt = currentImageTitle + ' — ' + (ilbIndex + 1);
+    ilbImage.decoding = 'async';
 
     var showNav = currentImages.length > 1;
     if (ilbPrev) ilbPrev.style.display = showNav ? 'flex' : 'none';
@@ -553,6 +603,7 @@
     if (ilbCounter) {
       ilbCounter.textContent = showNav ? (ilbIndex + 1) + ' / ' + currentImages.length : '';
     }
+    preloadAdjacent();
   }
 
   function lightboxNext() {
@@ -602,13 +653,15 @@
   });
 
   /* ══════════════════════════════════════════════════════════════
-     IMAGE ERROR LOGGING
+     IMAGE ERROR LOGGING (dev only — silent in production)
      ══════════════════════════════════════════════════════════════ */
-  document.querySelectorAll('img').forEach(function (img) {
-    img.addEventListener('error', function () {
-      console.warn('[Exhibition] Image not found → ' + img.getAttribute('src'));
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    document.querySelectorAll('img').forEach(function (img) {
+      img.addEventListener('error', function () {
+        console.warn('[Exhibition] Image not found → ' + img.getAttribute('src'));
+      });
     });
-  });
+  }
 
   /* ══════════════════════════════════════════════════════════════
      TESTIMONIALS
@@ -638,7 +691,7 @@
     carousel.addEventListener('touchstart', function (e) { tsX = e.touches[0].clientX; }, { passive: true });
     carousel.addEventListener('touchend', function (e) {
       if (tsX === null) return;
-      var diff = tsX - e.changedTouches[0].clientX;
+      var diff = tsX - e.changedTouches[0].clientX; 
       if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
       tsX = null;
     }, { passive: true });

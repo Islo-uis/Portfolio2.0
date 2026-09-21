@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <title>Louis Amiel Rollorata — Digital Works</title>
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="https://fonts.gstatic.com/s/dmserifdisplay/v15/-nFZOGWpo8Z2jMcVLSKA4Lo.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.woff2">
   <meta name="description" content="A curated exhibition of digital works by Louis Amiel Rollorata.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,7 +113,6 @@
     .blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(90px);
       will-change: transform;
       opacity: .9;
       transition: background-color .35s var(--ease);
@@ -154,26 +157,14 @@
     .page-overlay::after {
       content: '';
       position: absolute;
-      inset: -40px;
+      inset: 0;
       background-image: radial-gradient(circle at 1px 1px, rgba(10, 10, 10, 0.055) 1px, transparent 0);
       background-size: 20px 20px;
-      animation: grainDrift 60s linear infinite;
       pointer-events: none;
-      will-change: transform;
     }
 
     [data-theme="dark"] .page-overlay::after {
       background-image: radial-gradient(circle at 1px 1px, rgba(240, 238, 233, 0.05) 1px, transparent 0);
-    }
-
-    @keyframes grainDrift {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-
-      100% {
-        transform: translate3d(20px, 20px, 0);
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1844,14 +1835,15 @@
         padding: 0 1.25rem
       }
     }
+
     .entrance-sub {
-  font-size: .72rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 400;
-  margin-top: var(--sp-sm);
-}
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: var(--sp-sm);
+    }
   </style>
 </head>
 
@@ -2005,7 +1997,7 @@
               data-gallery-cat="Front-End · UI/UX · 2023"
               data-gallery-desc="An interactive braille-learning platform combining audio feedback, gamified exercises, and real-time progress tracking to make literacy accessible for visually impaired learners."
               data-gallery-url="https://braillevox.com/" data-images='[]'>
-              <img src="Thumbnails/BrailleVox.webp" alt="BrailleVox" loading="lazy">
+              <img src="Thumbnails/BrailleVox Logo.svg" alt="BrailleVox" loading="lazy">
               <span class="exhibit-img-tag">BrailleVox</span>
             </figure>
             <div class="exhibit-content">
@@ -2058,7 +2050,7 @@
               data-gallery-cat="Developer Tools · 2024–25"
               data-gallery-desc="A collection of small browser-based utilities — each solving a specific, practical problem without feature bloat."
               data-gallery-url="https://islo-uis.github.io/Utilsuite/" data-images='[]'>
-              <img src="Thumbnails/Utility.webp" alt="Utility Suite" loading="lazy">
+              <img src="Thumbnails/UtilSuite.svg" alt="Utility Suite" loading="lazy">
               <span class="exhibit-img-tag">Utility Suite</span>
             </figure>
           </div>
@@ -2360,14 +2352,14 @@
           <div class="about-left reveal">
             <div class="about-portrait">
               <div class="portrait-placeholder">
-                <img src="MyPic.png" alt="Louis Amiel Rollorata">
+                <img src="MyPic.webp" alt="Louis Amiel Rollorata">
                 <div class="ph-label">[Portrait]</div>
               </div>
             </div>
             <p class="about-caption">Louis Amiel B. Rollorata — Tagum City, Philippines</p>
           </div>
           <div class="about-right reveal">
-            <h2 class="about-name">Louis<br><em>Amiel</em><br>Rollorata</h2>
+            <h2 class="about-name">Louis<em> Amiel</em><br>Rollorata</h2>
             <p class="about-body">
               I work at the intersection of web development, design, and content —
               which is less a niche than it sounds. Most digital products require all three
