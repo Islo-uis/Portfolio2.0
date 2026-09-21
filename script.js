@@ -5,12 +5,12 @@
 (function () {
   'use strict';
 
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ══════════════════════════════════════════════════════════════
      CARD DATA
-     Featured exhibits are hand-written in index.html.
      ══════════════════════════════════════════════════════════════ */
 
-  /* NDA cards — inside Featured Web */
   var WEB_PROJECTS = [
     {
       title: 'Smart Cacao Monitoring System',
@@ -44,7 +44,6 @@
     }
   ];
 
-  /* Additional Works cards — remaining reels + design pieces */
   var ADDITIONAL_PROJECTS = [
     {
       category: 'reel',
@@ -154,6 +153,27 @@
       applyTheme(e.matches ? 'dark' : 'light');
     }
   });
+
+  /* ══════════════════════════════════════════════════════════════
+     DYNAMIC OVERLAY — three blobs drifting via anime.js
+     ══════════════════════════════════════════════════════════════ */
+  function initOverlayMotion() {
+    if (prefersReducedMotion) return;
+    if (!window.anime || typeof anime.animate !== 'function') return;
+
+    anime.animate('.blob-1', {
+      x: [0, 140], y: [0, 100], scale: [1, 1.2],
+      duration: 20000, loop: true, alternate: true, ease: 'inOutSine'
+    });
+    anime.animate('.blob-2', {
+      x: [0, -180], y: [0, 120], scale: [1, 1.15],
+      duration: 26000, loop: true, alternate: true, ease: 'inOutSine'
+    });
+    anime.animate('.blob-3', {
+      x: [0, 110], y: [0, -140], scale: [1, 1.22],
+      duration: 24000, loop: true, alternate: true, ease: 'inOutSine'
+    });
+  }
 
   /* ══════════════════════════════════════════════════════════════
      NAV
@@ -581,7 +601,9 @@
     if (e.key === 'ArrowLeft' && currentVideos.length > 1) selectVideo(currentVideoIndex - 1);
   });
 
-  /* IMAGE ERROR LOGGING */
+  /* ══════════════════════════════════════════════════════════════
+     IMAGE ERROR LOGGING
+     ══════════════════════════════════════════════════════════════ */
   document.querySelectorAll('img').forEach(function (img) {
     img.addEventListener('error', function () {
       console.warn('[Exhibition] Image not found → ' + img.getAttribute('src'));
@@ -622,11 +644,16 @@
     }, { passive: true });
   }
 
-  /* FOOTER YEAR */
+  /* ══════════════════════════════════════════════════════════════
+     FOOTER YEAR
+     ══════════════════════════════════════════════════════════════ */
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
 
-  /* BOOT */
+  /* ══════════════════════════════════════════════════════════════
+     BOOT
+     ══════════════════════════════════════════════════════════════ */
+  initOverlayMotion();
   renderGrid(WEB_PROJECTS, 'gridWeb', 'web');
   renderGrid(ADDITIONAL_PROJECTS, 'gridCreative', 'graphics');
 })();
